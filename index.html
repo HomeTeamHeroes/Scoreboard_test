@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoreboard</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .scoreboard {
+            width: 300px;
+            height: 400px;
+            border: 5px solid black;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+        }
+        .scoreboard .scores {
+            display: flex;
+            justify-content: space-around;
+            width: 80%;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .team {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .team span {
+            font-size: 2rem;
+        }
+        .team button {
+            font-size: 1.5rem;
+            margin: 5px;
+            width: 40px;
+            height: 40px;
+        }
+        .separator {
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scoreboard">
+        <div class="scores">
+            <div class="team">
+                <span id="team1-score">0</span>
+                <div>
+                    <button onclick="changeScore('team1', 1)">+</button>
+                    <button onclick="changeScore('team1', -1)">-</button>
+                </div>
+            </div>
+            <div class="separator">-</div>
+            <div class="team">
+                <span id="team2-score">0</span>
+                <div>
+                    <button onclick="changeScore('team2', 1)">+</button>
+                    <button onclick="changeScore('team2', -1)">-</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let team1Score = 0;
+        let team2Score = 0;
+
+        function changeScore(team, amount) {
+            if (team === 'team1') {
+                team1Score += amount;
+                if (team1Score < 0) team1Score = 0; // Prevent negative scores
+                document.getElementById('team1-score').innerText = team1Score;
+            } else if (team === 'team2') {
+                team2Score += amount;
+                if (team2Score < 0) team2Score = 0; // Prevent negative scores
+                document.getElementById('team2-score').innerText = team2Score;
+            }
+        }
+    </script>
+
+</body>
+</html>
