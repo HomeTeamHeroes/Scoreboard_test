@@ -5,23 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Scoreboard App - Menu</title>
   <style>
-    /* Ensure the image is responsive */
-    img {
-      width: 100%;
-      height: auto;
+    /* Ensure the body and html take the full height and disable scrolling */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden; /* Disable scrolling */
+    }
+
+    /* Ensure the image takes up as much screen space as possible */
+    .responsive-image {
+      width: 100vw; /* Full viewport width */
+      height: 100vh; /* Full viewport height */
+      object-fit: cover; /* Scale the image to cover the screen */
       display: block;
     }
   </style>
 </head>
 <body>
 
-  <!-- Display the first screen image with an image map -->
-  <img src="images/test_menu.png" alt="Scoreboard App Menu" usemap="#menu-map">
+  <!-- Display the new menu image with an image map -->
+  <img src="test_menu.png" alt="Scoreboard App Menu" usemap="#menu-map" class="responsive-image">
 
   <!-- Image map for defining clickable regions -->
   <map name="menu-map">
-    <!-- Scoreboard button area, links to the scoreboard functionality -->
-    <area shape="rect" coords="40,350,200,400" href="scoreboard.html" alt="Scoreboard">
+    <!-- Placeholder: Add your custom area coordinates here -->
+    <!-- Example:
+    <area shape="rect" coords="213,171,247,297" href="scoreboard.html" alt="Scoreboard">
+    -->
   </map>
 
 </body>
