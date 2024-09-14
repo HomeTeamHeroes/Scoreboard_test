@@ -3,37 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scoreboard App - Menu</title>
+  <title>Responsive Image Map - Scoreboard App</title>
   <style>
-    /* Ensure the body and html take the full height and disable scrolling */
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
       overflow: hidden; /* Disable scrolling */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000;
     }
 
-    /* Ensure the image takes up as much screen space as possible */
-    .responsive-image {
-      width: 100vw; /* Full viewport width */
-      height: 100vh; /* Full viewport height */
-      object-fit: cover; /* Scale the image to cover the screen */
+    img {
+      max-width: 100%;
+      height: auto;
       display: block;
+    }
+
+    /* To make sure the image map resizes correctly */
+    .image-container {
+      position: relative;
+      width: 100%;
+      max-width: 100vw; /* Set to viewport width */
     }
   </style>
 </head>
 <body>
 
-  <!-- Display the new menu image with an image map -->
-  <img src="test_menu.png" alt="Scoreboard App Menu" usemap="#menu-map" class="responsive-image">
+  <div class="image-container">
+    <!-- The new image with the image map -->
+    <img src="test_menu.png" alt="Scoreboard App Menu" usemap="#menu-map" id="menu-image">
+    <map name="menu-map" id="menu-map">
+      <!-- These are the raw coordinates; they will be adjusted via JS -->
+      <area shape="rect" coords="213,171,247,297" href="scoreboard.html" alt="Scoreboard">
+      <!-- You will need to adjust/add more areas here based on your coordinates -->
+    </map>
+  </div>
 
-  <!-- Image map for defining clickable regions -->
-  <map name="menu-map">
-    <!-- Placeholder: Add your custom area coordinates here -->
-    <!-- Example:
-    <area shape="rect" coords="213,171,247,297" href="scoreboard.html" alt="Scoreboard">
-    -->
-  </map>
+  <script>
+    // Function to make the image map responsive
+    function resizeImageMap() {
+      const img = document.getElementById('menu-image');
+      const originalWidth = 625;  // Original image width in pixels
+      const originalHeight = 352; // Original image height in pixels
+
+      // Get the current image size
+      const currentWidth = img.clientWidth;
+      const currentHeight = img.clientHeight;
+
+      // Calculate the scale ratio
+      const scaleX = currentWidth / originalWidth;
+      const scaleY = currentHeight / originalHeight;
+
+      // Adjust each area on the map
+      const areas = document.getElementsByTagName('area');
+      for (let i = 0; i < areas.length; i++) {
+        const originalCoords = areas[i].getAttribute('coords').split(',');
+        const newCoords = originalCoords.map((coord, index) => {
+          return (index % 2 === 0) ? Math.round(coord * scaleX) : Math.round(coord * scaleY);
+        });
+        areas[i].setAttribute('coords', newCoords.join(','));
+      }
+    }
+
+    // Resize the image map when the window is resized
+    window.addEventListener('resize', resizeImageMap);
+
+    // Resize the image map on initial load
+    window.addEventListener('load', resizeImageMap);
+  </script>
 
 </body>
 </html>
