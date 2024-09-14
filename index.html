@@ -3,78 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Image Map - Scoreboard App</title>
+  <title>Responsive Menu</title>
   <style>
-    html, body {
+    body, html {
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden; /* Disable scrolling */
+      overflow: hidden;
     }
 
-    /* Ensure the container takes up full viewport height */
-    .container {
-      width: 100vw;
+    #menu {
+      background-image: url('test_menu.png'); /* Add your image path here */
+      background-size: cover;
+      background-position: center;
       height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: black;
+      width: 100vw;
     }
 
-    /* Ensure the image scales responsively while keeping aspect ratio */
-    #menu-image {
-      max-width: 100%;
-      max-height: 100%;
-      width: auto;
-      height: auto;
+    /* Make sure the image is fully responsive */
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Map area links styling */
+    map area {
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-
-  <div class="container">
-    <!-- The new image with the image map -->
-    <img src="test_menu.png" alt="Scoreboard App Menu" usemap="#menu-map" id="menu-image">
-    <map name="menu-map" id="menu-map">
-      <!-- The new coords added for the 'Scoreboard' button -->
-      <area shape="rect" coords="213,171,247,297" href="scoreboard.html" alt="Scoreboard">
-      <!-- Add other areas here as needed -->
+  <div id="menu">
+    <img src="your-image.png" alt="Menu Image" usemap="#menu-map">
+    <map name="menu-map">
+      <!-- Adjust coordinates based on the rotated image -->
+      <area shape="rect" coords="213,171,249,301" href="scoreboard.html" alt="Scoreboard">
+      <!-- Add other interactive areas similarly -->
     </map>
   </div>
-
-  <script>
-    // Function to make the image map responsive
-    function resizeImageMap() {
-      const img = document.getElementById('menu-image');
-      const originalWidth = 352;  // Original image width in pixels (adjust to actual width)
-      const originalHeight = 625; // Original image height in pixels (adjust to actual height)
-
-      // Get the current image size
-      const currentWidth = img.clientWidth;
-      const currentHeight = img.clientHeight;
-
-      // Calculate the scale ratio
-      const scaleX = currentWidth / originalWidth;
-      const scaleY = currentHeight / originalHeight;
-
-      // Adjust each area on the map
-      const areas = document.getElementsByTagName('area');
-      for (let i = 0; i < areas.length; i++) {
-        const originalCoords = areas[i].getAttribute('coords').split(',');
-        const newCoords = originalCoords.map((coord, index) => {
-          return (index % 2 === 0) ? Math.round(coord * scaleX) : Math.round(coord * scaleY);
-        });
-        areas[i].setAttribute('coords', newCoords.join(','));
-      }
-    }
-
-    // Resize the image map when the window is resized
-    window.addEventListener('resize', resizeImageMap);
-
-    // Resize the image map on initial load
-    window.addEventListener('load', resizeImageMap);
-  </script>
-
 </body>
 </html>
