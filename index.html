@@ -9,38 +9,31 @@
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    #menu {
-      background-image: url('test_menu.png'); /* Add your image path here */
-      background-size: cover;
-      background-position: center;
-      height: 100vh;
-      width: 100vw;
-    }
-
-    /* Make sure the image is fully responsive */
     img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover; /* Ensures image fits the entire viewport */
     }
 
-    /* Map area links styling */
+    /* Optional: Ensuring the map areas are clickable */
     map area {
       cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div id="menu">
-    <img src="test_menu.png" alt="Menu Image" usemap="#menu-map">
-    <map name="menu-map">
-      <!-- Adjust coordinates based on the rotated image -->
-      <area shape="rect" coords="213,171,249,301" href="scoreboard.html" alt="Scoreboard">
-      <!-- Add other interactive areas similarly -->
-    </map>
-  </div>
+  <!-- Use the image as the main element with an image map -->
+  <img src="test_menu.png" alt="Menu Image" usemap="#menu-map">
+
+  <map name="menu-map">
+    <!-- Define clickable areas using correct coordinates -->
+    <area shape="rect" coords="213,171,249,301" href="scoreboard.html" alt="Scoreboard">
+    <!-- Add other clickable areas as needed -->
+  </map>
 </body>
 </html>
